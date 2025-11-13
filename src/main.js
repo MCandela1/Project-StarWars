@@ -103,7 +103,7 @@ function renderLoader() {
 function renderHome() {
     appContainer.innerHTML = `
         <div class="home-view">
-        <h2 class="home-title">Bienvenido, joven Padawan</h2>
+        <h2 class="home-title">Bienvenido Padawan</h2>
             
             <p> Esta base de datos es una herramienta para explorar la galaxia usando la información de la SWAPI.</p>
             

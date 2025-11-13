@@ -54,6 +54,9 @@ body {
     justify-content: center;
     gap: 1rem;
 }
+.title-text{
+    line-height: 0.8;
+}
 .logo-in-title {
     width: 40px;
     height: 40px;

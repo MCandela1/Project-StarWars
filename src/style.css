@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Star Jedi';
+    src: url('./fonts/Starjedi.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 :root {
     --color-accent: #F5A623;
     --color-dark-bg: #0A192F;
@@ -5,7 +11,7 @@
     --color-dark-text: #0A192F;
     --color-card-bg: #112240;
     --color-border: #3A4E71;
-    --font-title: 'Poller One', sans-serif;
+    --font-title: 'Star Jedi', sans-serif;
     --font-body: 'Roboto', sans-serif;
 }
 
@@ -36,7 +42,8 @@ body {
 .title {
     font-family: var(--font-title);
     color: var(--color-accent);
-    font-size: 2.5rem;
+    text-transform: lowercase;
+    font-size: 3rem;
     letter-spacing: 2px;
     text-shadow: 0 0 10px var(--color-accent);
     cursor: pointer;
@@ -100,6 +107,7 @@ body {
     color: var(--color-accent);
     font-size: 2.2rem; 
     margin-bottom: 1.5rem;
+    text-transform: lowercase;
 }
 
 .content-title-with-icon {

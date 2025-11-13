@@ -55,12 +55,12 @@ function handleFavoriteClick(event) {
 
     if (isCurrentlyFavorite) {
         removeFavorite(category, id);
-        iconImg.src = '/icons/star-empty.png';
+        iconImg.src = '/icons/sable-off.png';
         button.dataset.isfavorite = 'false';
         button.classList.remove('is-favorite');
     } else {
         addFavorite(category, id, name);
-        iconImg.src = '/icons/star-filled.png';
+        iconImg.src = '/icons/sable-on.png';
         button.dataset.isfavorite = 'true';
         button.classList.add('is-favorite');
     }
@@ -196,7 +196,7 @@ async function renderList(category) {
             titleIconSrc = '/icons/logo-planets.png';
             break;
         case 'films':
-            titleIconSrc = '/icons/film.png';
+            titleIconSrc = '/icons/films.png';
             break;
         case 'species':
             titleIconSrc = '/icons/logo-species.png';
@@ -264,7 +264,7 @@ async function renderDetail(category, id) {
     const title = data.name || data.title;
     
     const isItemFavorite = isFavorite(category, id);
-    const favIconSrc = isItemFavorite ? '/icons/star-filled.png' : '/icons/star-empty.png';
+    const favIconSrc = isItemFavorite ? '/icons/sable-on.png' : '/icons/sable-off.png';
     const favButtonClass = isItemFavorite ? 'favorite-button is-favorite' : 'favorite-button';
 
     const detailList = Object.entries(data)

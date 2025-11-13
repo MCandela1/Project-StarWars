@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SWAPI App</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poller+One&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+
+    <header class="main-header container">
+        <h1 class="title" data-link="/">
+          <img src="/logo-w.png" class="logo-in-title" alt="Logo" />
+          SWAPI EXPLORER
+        </h1>
+    </header>
+
+    <nav class="main-nav container">
+        <ul class="nav-list" id="navList">
+            <li><a href="#/people">Personajes</a></li>
+            <li><a href="#/planets">Planetas</a></li>
+            <li><a href="#/films">Películas</a></li>
+            <li><a href="#/species">Especies</a></li>
+            <li><a href="#/vehicles">Vehículos</a></li>
+            <li><a href="#/starships">Naves</a></li>
+        </ul>
+    </nav>
+
+    <main id="app" class="container">
+    </main>
+    
+    <footer class="main-footer container">
+        <p>Usando la <a href="https://swapi.dev/" target="_blank" rel="noopener noreferrer">SWAPI (Star Wars API)</a>. Proyecto demo.</p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+    
+</body>
+</html>
+
+

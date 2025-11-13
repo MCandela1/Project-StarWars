@@ -94,7 +94,6 @@ body {
     color: var(--color-dark-text);
 }
 
-/* --- Contenido Principal (SPA) --- */
 #app {
     min-height: 60vh;
     padding: 1rem;
@@ -103,7 +102,6 @@ body {
     border: 1px solid var(--color-border);
 }
 
-/* --- ESTILOS DE VISTAS --- */
 .home-view {
     animation: fadeIn 0.5s;
 }
@@ -137,14 +135,12 @@ body {
     color: var(--color-accent);
 }
 
-/* Vista: Listado */
 .list-view-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
     animation: fadeIn 0.5s;
 }
-/* AHORA LIMPIO, SIN FLEXBOX */
 .list-item-card {
     background-color: var(--color-dark-bg);
     border: 1px solid var(--color-border);
@@ -197,18 +193,16 @@ body {
     border-color: rgba(204, 214, 246, 0.8);
 }
 
-/* Vista: Detalle */
 .detail-view {
     animation: fadeIn 0.5s;
 }
-/* NUEVO TÍTULO DE DETALLE */
 .detail-title {
     font-family: var(--font-title);
     color: var(--color-accent);
     font-size: 2.2rem; 
     margin-bottom: 1.5rem;
     text-transform: lowercase;
-    clear: both; /* Limpia el float del botón */
+    clear: both; 
 }
 .detail-view ul {
     list-style: none;
@@ -244,7 +238,6 @@ body {
     background-color: #fff;
 }
 
-/* NUEVOS ESTILOS PARA EL BOTÓN DE ESTRELLA (IMG) */
 .favorite-button {
     display: inline-block;
     float: right;
@@ -258,10 +251,12 @@ body {
     line-height: 0;
 }
 .favorite-button img {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     -webkit-user-drag: none;
     user-select: none;
+    transition: filter 0.3s;
+    filter: drop-shadow(0 0 4px(204, 214, 246, 0.6));
 }
 .favorite-button:hover {
     border-color: var(--color-accent);
@@ -271,7 +266,10 @@ body {
     border-color: var(--color-accent);
 }
 
-/* --- Loader / Spinner --- */
+.favorite-button.is-favorite img {
+    filter: drop-shadow(0 0 8px var(--color-accent)) drop-shadow(0 0 4px var(--color-accent));
+}
+
 .loader {
     display: flex;
     justify-content: center;
@@ -294,7 +292,6 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Footer --- */
 .main-footer {
     text-align: center;
     padding: 2rem 1rem;
@@ -307,7 +304,6 @@ body {
     color: var(--color-accent);
 }
 
-/* --- Responsive Móvil --- */
 @media (max-width: 600px) {
     .container {
         width: 95%;

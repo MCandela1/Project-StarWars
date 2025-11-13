@@ -109,7 +109,7 @@ function renderHome() {
             
             <p>Usa la barra de navegación de arriba para investigar:</p>
             
-            <ul classclass="home-features-list">
+            <ul class="home-features-list">
                 <li>Información detallada sobre <strong>Personajes</strong>, <strong>Planetas</strong>, <strong>Naves</strong> y más.</li>
                 <li>Guarda tus datos de misión más importantes (en <strong>Favoritos</strong>) usando el icono del sable de luz.</li>
             </ul>

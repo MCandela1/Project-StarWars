@@ -70,6 +70,31 @@ async function renderList(category) {
         return;
     }
 
+    let titleIconSrc = '';
+    switch (category) {
+        case 'people':
+            titleIconSrc = '/icons/robot.png'; 
+            break;
+        case 'planets':
+            titleIconSrc = '/icons/logo-planets.png';
+            break;
+        case 'films':
+            titleIconSrc = '/icons/film.png';
+            break;
+        case 'species':
+            titleIconSrc = '/icons/logo-species.png';
+            break;
+        case 'vehicles':
+            titleIconSrc = '/icons/logo-vehicle.png';
+            break;
+        case 'starships':
+            titleIconSrc = '/icons/logo-ship.png';
+            break;
+        default:
+            titleIconSrc = '/default.png'; 
+    }
+
+
     let cardsHtml = data.results.map(item => {
         const title = item.name || item.title;
         const id = getIdFromUrl(item.url);
@@ -77,70 +102,37 @@ async function renderList(category) {
         let hoverGlowClass = 'glow-hover-default';
         if (category === 'people') {
             switch (item.eye_color) {
-                case 'blue': hoverGlowClass = 'glow-hover-blue'; break;
-                case 'red': hoverGlowClass = 'glow-hover-red'; break;
-                case 'yellow': hoverGlowClass = 'glow-hover-yellow'; break;
-                case 'brown': hoverGlowClass = 'glow-hover-brown'; break;
-                case 'green': hoverGlowClass = 'glow-hover-green'; break;
-                case 'orange': hoverGlowClass = 'glow-hover-orange'; break;
-                case 'hazel': hoverGlowClass = 'glow-hover-hazel'; break;
+                 case 'blue': hoverGlowClass = 'glow-hover-blue'; break;
+                 case 'red': hoverGlowClass = 'glow-hover-red'; break;
+                 case 'yellow': hoverGlowClass = 'glow-hover-yellow'; break;
+                 case 'brown': hoverGlowClass = 'glow-hover-brown'; break;
+                 case 'green': hoverGlowClass = 'glow-hover-green'; break;
+                 case 'orange': hoverGlowClass = 'glow-hover-orange'; break;
+                 case 'hazel': hoverGlowClass = 'glow-hover-hazel'; break;
             }
         }
 
-        let iconSrc = '';
         
-        if (category === 'people') {
-            if (item.gender === 'n/a' || item.gender === 'none') {
-                 iconSrc = '/icons/robot.png'; 
-            } else {
-                 iconSrc = '/icons/jedi.png'; 
-            }
-        } else {
-            switch (category) {
-                case 'planets':
-                    iconSrc = '/icons/logo-planets.png'; 
-                    break;
-                case 'films':
-                    iconSrc = '/icons/films.png'; 
-                    break;
-                case 'species':
-                    iconSrc = '/icons/logo-species.png'; 
-                    break;
-                case 'vehicles':
-                    iconSrc = '/icons/logo-vehicle.png'; 
-                    break;
-                case 'starships':
-                    iconSrc = '/icons/logo-ship.png'; 
-                    break;
-                default:
-                    iconSrc = '/icons/default.png';
-            }
-        }
-
         return `
             <a class="list-item-card ${hoverGlowClass}" href="#/${category}/${id}">
-                
-                <div class="card-icon-container">
-                    <img src="${iconSrc}" alt="Icono ${category}" class="card-icon-img" />
-                </div>
-
-                <div class="card-text-content">
-                    <h3>${title}</h3>
-                    ${category === 'people' ? `<p>Nacimiento: ${item.birth_year}</p>` : ''}
-                    ${category === 'planets' ? `<p>Clima: ${item.climate}</p>` : ''}
-                    ${category === 'films' ? `<p>Director: ${item.director}</p>` : ''}
-                    ${category === 'species' ? `<p>Lenguaje: ${item.language}</p>` : ''}
-                    ${category === 'vehicles' ? `<p>Modelo: ${item.model}</p>` : ''}
-                    ${category === 'starships' ? `<p>Modelo: ${item.model}</p>` : ''}
-                </div>
+                <h3>${title}</h3>
+                ${category === 'people' ? `<p>Nacimiento: ${item.birth_year}</p>` : ''}
+                ${category === 'planets' ? `<p>Clima: ${item.climate}</p>` : ''}
+                ${category === 'films' ? `<p>Director: ${item.director}</p>` : ''}
+                ${category === 'species' ? `<p>Lenguaje: ${item.language}</p>` : ''}
+                ${category === 'vehicles' ? `<p>Modelo: ${item.model}</p>` : ''}
+                ${category === 'starships' ? `<p>Modelo: ${item.model}</p>` : ''}
             </a>
         `;
     }).join('');
 
+    
     appContainer.innerHTML = `
         <h2 class="content-title-with-icon" style="text-transform: capitalize;">
-            <img src="/logo-w.png" class="logo-in-content-title" alt="logo" />
+            
+            <img src="${titleIconSrc}" class="logo-in-content-title" alt="Icono ${category}" />
             ${category}
+
         </h2>
         <div class="list-view-container">
             ${cardsHtml}

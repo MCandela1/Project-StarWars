@@ -64,13 +64,16 @@ function renderHome() {
 async function renderList(category) {
     renderLoader();
     const data = await fetchSWAPI(category);
+    
     if (!data || !data.results) {
-        appContainer.innerHTML = `<p class"error">No se pudieron cargar los datos para ${category}.</p>`;
+        appContainer.innerHTML = `<p class="error">No se pudieron cargar los datos para ${category}.</p>`;
         return;
     }
+
     let cardsHtml = data.results.map(item => {
         const title = item.name || item.title;
         const id = getIdFromUrl(item.url);
+        
         let hoverGlowClass = 'glow-hover-default';
         if (category === 'people') {
             switch (item.eye_color) {
@@ -83,15 +86,53 @@ async function renderList(category) {
                 case 'hazel': hoverGlowClass = 'glow-hover-hazel'; break;
             }
         }
+
+        let iconSrc = '';
+        
+        if (category === 'people') {
+            if (item.gender === 'n/a' || item.gender === 'none') {
+                 iconSrc = '/icons/robot.png'; 
+            } else {
+                 iconSrc = '/icons/jedi.png'; 
+            }
+        } else {
+            switch (category) {
+                case 'planets':
+                    iconSrc = '/icons/logo-planets.png'; 
+                    break;
+                case 'films':
+                    iconSrc = '/icons/films.png'; 
+                    break;
+                case 'species':
+                    iconSrc = '/icons/logo-species.png'; 
+                    break;
+                case 'vehicles':
+                    iconSrc = '/icons/logo-vehicle.png'; 
+                    break;
+                case 'starships':
+                    iconSrc = '/icons/logo-ship.png'; 
+                    break;
+                default:
+                    iconSrc = '/icons/default.png';
+            }
+        }
+
         return `
             <a class="list-item-card ${hoverGlowClass}" href="#/${category}/${id}">
-                <h3>${title}</h3>
-                ${category === 'people' ? `<p>Nacimiento: ${item.birth_year}</p>` : ''}
-                ${category === 'planets' ? `<p>Clima: ${item.climate}</p>` : ''}
-                ${category === 'films' ? `<p>Director: ${item.director}</p>` : ''}
-                ${category === 'species' ? `<p>Lenguaje: ${item.language}</p>` : ''}
-                ${category === 'vehicles' ? `<p>Modelo: ${item.model}</p>` : ''}
-                ${category === 'starships' ? `<p>Modelo: ${item.model}</p>` : ''}
+                
+                <div class="card-icon-container">
+                    <img src="${iconSrc}" alt="Icono ${category}" class="card-icon-img" />
+                </div>
+
+                <div class="card-text-content">
+                    <h3>${title}</h3>
+                    ${category === 'people' ? `<p>Nacimiento: ${item.birth_year}</p>` : ''}
+                    ${category === 'planets' ? `<p>Clima: ${item.climate}</p>` : ''}
+                    ${category === 'films' ? `<p>Director: ${item.director}</p>` : ''}
+                    ${category === 'species' ? `<p>Lenguaje: ${item.language}</p>` : ''}
+                    ${category === 'vehicles' ? `<p>Modelo: ${item.model}</p>` : ''}
+                    ${category === 'starships' ? `<p>Modelo: ${item.model}</p>` : ''}
+                </div>
             </a>
         `;
     }).join('');

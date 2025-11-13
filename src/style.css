@@ -101,12 +101,15 @@ body {
 
 .home-view {
     animation: fadeIn 0.5s;
-    text-align: center;
+    
+    display: flex;
+    flex-direction: column; 
+    align-items: center;     
 }
 .home-features-list {
     list-style: none; 
     max-width: 55ch;
-    margin: 1.5rem auto;
+    margin: 1.5rem 0;
     padding-left: 1.5rem;
     border-left: 3px solid var(--color-border);
 }
@@ -139,6 +142,7 @@ body {
     font-size: 1.1rem;
     max-width: 60ch;
     margin-bottom: 1rem;
+    text-align: left;
 }
 .home-view a {
     color: var(--color-accent);

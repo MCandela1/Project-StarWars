@@ -101,13 +101,14 @@ body {
 
 .home-view {
     animation: fadeIn 0.5s;
+    text-align: center;
 }
 .home-features-list {
     list-style: none; 
     max-width: 55ch;
     margin: 1.5rem auto;
     padding-left: 1.5rem;
-    text-align: center;
+    border-left: 3px solid var(--color-border);
 }
 
 .home-features-list li {

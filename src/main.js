@@ -105,7 +105,7 @@ function renderHome() {
         <div class="home-view">
             <h2 class="home-title">Bienvenido, joven Padawan</h2>
             
-            <p>Has accedido a los Archivos de la HoloRed. Esta base de datos es una herramienta para explorar la galaxia usando la información de la SWAPI.</p>
+            <p>Esta base de datos es una herramienta para explorar la galaxia usando la información de la SWAPI.</p>
             
             <p>Usa la barra de navegación de arriba para investigar:</p>
             

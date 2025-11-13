@@ -15,6 +15,54 @@ function saveToCache(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
 }
 
+const FAVORITES_KEY = 'swapiFavorites';
+
+function getFavorites() {
+    const favorites = localStorage.getItem(FAVORITES_KEY);
+    return favorites ? JSON.parse(favorites) : [];
+}
+
+function saveFavorites(favorites) {
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+}
+
+function isFavorite(category, id) {
+    const favorites = getFavorites();
+    return favorites.some(fav => fav.category === category && fav.id === id);
+}
+
+function addFavorite(category, id, name) {
+    const favorites = getFavorites();
+    if (!isFavorite(category, id)) {
+        favorites.push({ category, id, name });
+        saveFavorites(favorites);
+        console.log(`Añadido: ${name}`);
+    }
+}
+
+function removeFavorite(category, id) {
+    let favorites = getFavorites();
+    favorites = favorites.filter(fav => !(fav.category === category && fav.id === id));
+    saveFavorites(favorites);
+    console.log(`Quitado: ${id}`);
+}
+
+function handleFavoriteClick(event) {
+    const button = event.currentTarget;
+    const { category, id, name } = button.dataset;
+    let isCurrentlyFavorite = button.dataset.isfavorite === 'true';
+
+    if (isCurrentlyFavorite) {
+        removeFavorite(category, id);
+        button.textContent = '⭐ Añadir a Favoritos';
+        button.dataset.isfavorite = 'false';
+    } else {
+        addFavorite(category, id, name);
+        button.textContent = '🌟 Quitar de Favoritos';
+        button.dataset.isfavorite = 'true';
+    }
+}
+
 async function fetchSWAPI(endpoint) {
     const cacheKey = `swapi-${endpoint.replace('/', '-')}`;
     const cachedData = getFromCache(cacheKey);
@@ -145,7 +193,12 @@ async function renderDetail(category, id) {
     renderLoader();
     const data = await fetchSWAPI(`${category}/${id}`);
     if (!data) return;
+    
     const title = data.name || data.title;
+    
+    const isItemFavorite = isFavorite(category, id);
+    const favButtonText = isItemFavorite ? '🌟 Quitar de Favoritos' : '⭐ Añadir a Favoritos';
+
     const detailList = Object.entries(data)
         .filter(([key, value]) => 
             key !== 'name' && key !== 'title' && key !== 'created' &&
@@ -160,6 +213,14 @@ async function renderDetail(category, id) {
         <div class="detail-view">
             <a href="#/${category}" class="back-button">&larr; Volver a ${category}</a>
             
+            <button class="favorite-button" id="favButton" 
+                    data-category="${category}" 
+                    data-id="${id}" 
+                    data-name="${title}" 
+                    data-isfavorite="${isItemFavorite}">
+                ${favButtonText}
+            </button>
+            
             <h2 class="content-title-with-icon">
                 <img src="/logo-w.png" class="logo-in-content-title" alt="logo" />
                 ${title}
@@ -169,6 +230,8 @@ async function renderDetail(category, id) {
             </ul>
         </div>
     `;
+
+    document.getElementById('favButton').addEventListener('click', handleFavoriteClick);
 }
 
 

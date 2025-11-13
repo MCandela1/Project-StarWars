@@ -1,9 +1,12 @@
+/* --- IMPORTAR FUENTE LOCAL --- */
 @font-face {
     font-family: 'Star Jedi';
     src: url('./fonts/Starjedi.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
+
+/* --- VARIABLES GLOBALES --- */
 :root {
     --color-accent: #F5A623;
     --color-dark-bg: #0A192F;
@@ -15,6 +18,7 @@
     --font-body: 'Roboto', sans-serif;
 }
 
+/* --- RESET BÁSICO --- */
 * {
     margin: 0;
     padding: 0;
@@ -33,6 +37,7 @@ body {
     padding: 1rem;
 }
 
+/* --- Header y Navegación --- */
 .main-header {
     padding: 1.5rem 0;
     border-bottom: 2px solid var(--color-accent);
@@ -89,6 +94,7 @@ body {
     color: var(--color-dark-text);
 }
 
+/* --- Contenido Principal (SPA) --- */
 #app {
     min-height: 60vh;
     padding: 1rem;
@@ -97,6 +103,7 @@ body {
     border: 1px solid var(--color-border);
 }
 
+/* --- ESTILOS DE VISTAS --- */
 .home-view {
     animation: fadeIn 0.5s;
 }
@@ -130,12 +137,14 @@ body {
     color: var(--color-accent);
 }
 
+/* Vista: Listado */
 .list-view-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
     animation: fadeIn 0.5s;
 }
+/* AHORA LIMPIO, SIN FLEXBOX */
 .list-item-card {
     background-color: var(--color-dark-bg);
     border: 1px solid var(--color-border);
@@ -144,6 +153,11 @@ body {
     text-decoration: none;
     color: var(--color-light-text);
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.list-item-card h3 {
+    font-size: 1.5rem;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
 }
 .list-item-card:hover {
     transform: translateY(-5px);
@@ -183,8 +197,18 @@ body {
     border-color: rgba(204, 214, 246, 0.8);
 }
 
+/* Vista: Detalle */
 .detail-view {
     animation: fadeIn 0.5s;
+}
+/* NUEVO TÍTULO DE DETALLE */
+.detail-title {
+    font-family: var(--font-title);
+    color: var(--color-accent);
+    font-size: 2.2rem; 
+    margin-bottom: 1.5rem;
+    text-transform: lowercase;
+    clear: both; /* Limpia el float del botón */
 }
 .detail-view ul {
     list-style: none;
@@ -220,6 +244,34 @@ body {
     background-color: #fff;
 }
 
+/* NUEVOS ESTILOS PARA EL BOTÓN DE ESTRELLA (IMG) */
+.favorite-button {
+    display: inline-block;
+    float: right;
+    padding: 0.5rem;
+    background-color: transparent;
+    border: 2px solid var(--color-border);
+    border-radius: 5px;
+    margin-left: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    line-height: 0;
+}
+.favorite-button img {
+    width: 24px;
+    height: 24px;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+.favorite-button:hover {
+    border-color: var(--color-accent);
+    transform: scale(1.1);
+}
+.favorite-button.is-favorite {
+    border-color: var(--color-accent);
+}
+
+/* --- Loader / Spinner --- */
 .loader {
     display: flex;
     justify-content: center;
@@ -242,6 +294,7 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* --- Footer --- */
 .main-footer {
     text-align: center;
     padding: 2rem 1rem;
@@ -254,6 +307,7 @@ body {
     color: var(--color-accent);
 }
 
+/* --- Responsive Móvil --- */
 @media (max-width: 600px) {
     .container {
         width: 95%;

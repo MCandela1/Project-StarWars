@@ -49,17 +49,20 @@ function removeFavorite(category, id) {
 
 function handleFavoriteClick(event) {
     const button = event.currentTarget;
+    const iconImg = button.querySelector('img'); 
     const { category, id, name } = button.dataset;
     let isCurrentlyFavorite = button.dataset.isfavorite === 'true';
 
     if (isCurrentlyFavorite) {
         removeFavorite(category, id);
-        button.textContent = '⭐ Añadir a Favoritos';
+        iconImg.src = '/icons/star-empty.png';
         button.dataset.isfavorite = 'false';
+        button.classList.remove('is-favorite');
     } else {
         addFavorite(category, id, name);
-        button.textContent = '🌟 Quitar de Favoritos';
+        iconImg.src = '/icons/star-filled.png';
         button.dataset.isfavorite = 'true';
+        button.classList.add('is-favorite');
     }
 }
 
@@ -106,6 +109,72 @@ function renderHome() {
             <p>Los datos que consultes se guardarán en <strong>localStorage</strong> (persistencia) para que la próxima vez carguen al instante.</p>
         </div>
     `;
+}
+
+function renderFavorites() {
+    const favorites = getFavorites();
+
+    appContainer.innerHTML = `
+        <h2 class="content-title-with-icon" style="text-transform: capitalize;">
+            <img src="/icons/star-filled.png" class="logo-in-content-title" alt="Icono Favoritos" />
+            Mis Favoritos
+        </h2>
+    `;
+
+    if (favorites.length === 0) {
+        appContainer.innerHTML += '<p>Todavía no has añadido ningún favorito. ¡Busca ítems y pulsa la estrella!</p>';
+        return;
+    }
+
+    const groupedFavorites = favorites.reduce((acc, fav) => {
+        const category = fav.category;
+        if (!acc[category]) {
+            acc[category] = [];
+        }
+        acc[category].push(fav);
+        return acc;
+    }, {});
+
+
+    let allSectionsHtml = '';
+
+    Object.entries(groupedFavorites).forEach(([category, items]) => {
+        
+        let titleIconSrc = '';
+        switch (category) {
+            case 'people': titleIconSrc = '/icons/robot.png'; break;
+            case 'planets': titleIconSrc = '/icons/logo-planets.png'; break;
+            case 'films': titleIconSrc = '/icons/film.png'; break;
+            case 'species': titleIconSrc = '/icons/logo-species.png'; break;
+            case 'vehicles': titleIconSrc = '/icons/logo-vehicle.png'; break;
+            case 'starships': titleIconSrc = '/icons/logo-ship.png'; break;
+            default: titleIconSrc = '/default.png'; 
+        }
+
+        allSectionsHtml += `
+            <h2 class="content-title-with-icon" style="text-transform: capitalize; margin-top: 2rem;">
+                <img src="${titleIconSrc}" class="logo-in-content-title" alt="${category}" />
+                ${category}
+            </h2>
+        `;
+
+        let cardsHtml = items.map(fav => {
+            return `
+                <a class="list-item-card glow-hover-default" href="#/${fav.category}/${fav.id}">
+                    <h3>${fav.name}</h3>
+                    <p>Categoría: ${fav.category}</p>
+                </a>
+            `;
+        }).join('');
+
+        allSectionsHtml += `
+            <div class="list-view-container">
+                ${cardsHtml}
+            </div>
+        `;
+    });
+
+    appContainer.innerHTML += allSectionsHtml;
 }
 
 
@@ -177,10 +246,8 @@ async function renderList(category) {
     
     appContainer.innerHTML = `
         <h2 class="content-title-with-icon" style="text-transform: capitalize;">
-            
             <img src="${titleIconSrc}" class="logo-in-content-title" alt="Icono ${category}" />
             ${category}
-
         </h2>
         <div class="list-view-container">
             ${cardsHtml}
@@ -197,7 +264,8 @@ async function renderDetail(category, id) {
     const title = data.name || data.title;
     
     const isItemFavorite = isFavorite(category, id);
-    const favButtonText = isItemFavorite ? '🌟 Quitar de Favoritos' : '⭐ Añadir a Favoritos';
+    const favIconSrc = isItemFavorite ? '/icons/star-filled.png' : '/icons/star-empty.png';
+    const favButtonClass = isItemFavorite ? 'favorite-button is-favorite' : 'favorite-button';
 
     const detailList = Object.entries(data)
         .filter(([key, value]) => 
@@ -213,18 +281,16 @@ async function renderDetail(category, id) {
         <div class="detail-view">
             <a href="#/${category}" class="back-button">&larr; Volver a ${category}</a>
             
-            <button class="favorite-button" id="favButton" 
+            <button class="${favButtonClass}" id="favButton" 
                     data-category="${category}" 
                     data-id="${id}" 
                     data-name="${title}" 
                     data-isfavorite="${isItemFavorite}">
-                ${favButtonText}
+                <img src="${favIconSrc}" alt="Añadir a Favoritos" />
             </button>
             
-            <h2 class="content-title-with-icon">
-                <img src="/logo-w.png" class="logo-in-content-title" alt="logo" />
-                ${title}
-            </h2>
+            <h2 class="detail-title">${title}</h2>
+            
             <ul>
                 ${detailList}
             </ul>
@@ -238,17 +304,30 @@ async function renderDetail(category, id) {
 function router() {
     const path = window.location.hash.slice(1).toLowerCase() || '/';
     document.querySelectorAll('#navList a').forEach(a => a.classList.remove('active'));
+    
     if (path === '/') {
         renderHome();
         return;
     }
+
+    if (path === '/favorites') {
+        renderFavorites();
+        const activeLink = document.querySelector(`a[href="#/favorites"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+        return;
+    }
+
     const parts = path.split('/');
     const category = parts[1];
     const id = parts[2];
+    
     const activeLink = document.querySelector(`#navList a[href="#/${category}"]`);
     if (activeLink) {
         activeLink.classList.add('active');
     }
+    
     if (id) {
         renderDetail(category, id);
     } else {

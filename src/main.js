@@ -103,9 +103,9 @@ function renderLoader() {
 function renderHome() {
     appContainer.innerHTML = `
         <div class="home-view">
-            <h2 class="home-title">Bienvenido, joven Padawan</h2>
+        <h2 class="home-title">Bienvenido, joven Padawan</h2>
             
-            <p>Esta base de datos es una herramienta para explorar la galaxia usando la información de la SWAPI.</p>
+            <p> Esta base de datos es una herramienta para explorar la galaxia usando la información de la SWAPI.</p>
             
             <p>Usa la barra de navegación de arriba para investigar:</p>
             
@@ -114,7 +114,7 @@ function renderHome() {
                 <li>Guarda tus datos de misión más importantes (en <strong>Favoritos</strong>) usando el icono del sable de luz.</li>
             </ul>
             
-            <p>Tu terminal guardará los datos que consultes para que tu próxima visita sea instantánea. Que la Fuerza te acompañe.</p>
+            <p>Ademas esta terminal recuerda tus ultimas consultas, la proxima vez que la abras se caragara la info al instante. Que la Fuerza te acompañe.</p>
         </div>
     `;
 }
@@ -152,7 +152,7 @@ function renderFavorites() {
         switch (category) {
             case 'people': titleIconSrc = '/icons/robot.png'; break;
             case 'planets': titleIconSrc = '/icons/logo-planets.png'; break;
-            case 'films': titleIconSrc = '/icons/film.png'; break;
+            case 'films': titleIconSrc = '/icons/films.png'; break;
             case 'species': titleIconSrc = '/icons/logo-species.png'; break;
             case 'vehicles': titleIconSrc = '/icons/logo-vehicle.png'; break;
             case 'starships': titleIconSrc = '/icons/logo-ship.png'; break;

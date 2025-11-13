@@ -103,10 +103,18 @@ function renderLoader() {
 function renderHome() {
     appContainer.innerHTML = `
         <div class="home-view">
-            <h2 class="home-title">Bienvenido, joven padawan.</h2>
-            <p>Usa la navegación de arriba para explorar el universo de Star Wars.</p>
-            <p>Toda la información es traída desde la <a href="https://swapi.dev/" target="_blank">SWAPI</a>.</p>
-            <p>Los datos que consultes se guardarán en <strong>localStorage</strong> (persistencia) para que la próxima vez carguen al instante.</p>
+            <h2 class="home-title">Bienvenido, joven Padawan</h2>
+            
+            <p>Has accedido a los Archivos de la HoloRed. Esta base de datos es una herramienta para explorar la galaxia usando la información de la SWAPI.</p>
+            
+            <p>Usa la barra de navegación de arriba para investigar:</p>
+            
+            <ul classclass="home-features-list">
+                <li>Información detallada sobre <strong>Personajes</strong>, <strong>Planetas</strong>, <strong>Naves</strong> y más.</li>
+                <li>Guarda tus datos de misión más importantes (en <strong>Favoritos</strong>) usando el icono del sable de luz.</li>
+            </ul>
+            
+            <p>Tu terminal guardará los datos que consultes para que tu próxima visita sea instantánea. Que la Fuerza te acompañe.</p>
         </div>
     `;
 }
@@ -116,13 +124,13 @@ function renderFavorites() {
 
     appContainer.innerHTML = `
         <h2 class="content-title-with-icon" style="text-transform: capitalize;">
-            <img src="/icons/star-filled.png" class="logo-in-content-title" alt="Icono Favoritos" />
+            <img src="/icons/sable-on.png" class="logo-in-content-title" alt="Icono Favoritos" />
             Mis Favoritos
         </h2>
     `;
 
     if (favorites.length === 0) {
-        appContainer.innerHTML += '<p>Todavía no has añadido ningún favorito. ¡Busca ítems y pulsa la estrella!</p>';
+        appContainer.innerHTML += '<p>Todavía no has añadido ningún favorito. ¡Busca y pulsa el sable!</p>';
         return;
     }
 

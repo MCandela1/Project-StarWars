@@ -102,6 +102,16 @@ body {
 .home-view {
     animation: fadeIn 0.5s;
 }
+.home-features-list {
+    list-style: none; 
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--color-border); 
+}
+
+.home-features-list li {
+    margin-bottom: 0.75rem; 
+}
 
 .home-title,
 .content-title-with-icon {
@@ -119,8 +129,8 @@ body {
 }
 
 .logo-in-content-title {
-    width: 32px;
-    height: 32px;
+    width: 50px;
+    height: 50px;
 }
 
 .home-view p {
@@ -248,8 +258,8 @@ body {
     line-height: 0;
 }
 .favorite-button img {
-    width: 32px;
-    height: 32px;
+    width: 70px;
+    height: 70px;
     -webkit-user-drag: none;
     user-select: none;
     transition: filter 0.3s;

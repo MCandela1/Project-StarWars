@@ -320,7 +320,30 @@ body {
     color: var(--color-accent);
 }
 
+.nav-toggle-btn {
+    display: none;
+    background-color: transparent;
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+    font-size: 1.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0.25rem 0.8rem;         
+    line-height: 1;                  
+    transition: all 0.3s;
+}
+.nav-toggle-btn:hover {
+    background: var(--color-accent);
+    color: var(--color-dark-text);
+}
+
 @media (max-width: 600px) {
+    .nav-toggle-btn {
+        display: block;
+        float: right;
+    }
+
     .container {
         width: 95%;
     }
@@ -328,7 +351,12 @@ body {
         font-size: 2rem;
     }
     .nav-list {
+        display: none; 
         flex-direction: column;
+        clear: both;
+    }
+    .nav-list.is-open {
+        display: flex;
     }
     .nav-list li {
         width: 100%;

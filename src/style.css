@@ -45,7 +45,7 @@ body {
     font-family: var(--font-title);
     color: var(--color-accent);
     text-transform: lowercase;
-    font-size: 3rem;
+    font-size: 5.5rem;
     letter-spacing: 2px;
     text-shadow: 0 0 10px var(--color-accent);
     cursor: pointer;
@@ -58,8 +58,8 @@ body {
     line-height: 0.8;
 }
 .logo-in-title {
-    width: 40px;
-    height: 40px;
+    width: 90px;
+    height: 90px;
 }
 .main-nav {
     background-color: var(--color-card-bg);

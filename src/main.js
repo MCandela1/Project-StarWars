@@ -349,3 +349,15 @@ window.addEventListener('load', router);
 document.querySelector('.title').addEventListener('click', () => {
     window.location.hash = '/';
 });
+
+const navToggleBtn = document.getElementById('navToggleBtn');
+
+navToggleBtn.addEventListener('click', () => {
+    navList.classList.toggle('is-open');
+});
+
+navList.addEventListener('click', (event) => {
+    if (event.target.tagName === 'A') {
+        navList.classList.remove('is-open');
+    }
+});
